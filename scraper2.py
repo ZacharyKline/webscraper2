@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import sys
 import argparse
 import requests
@@ -17,6 +17,11 @@ def find_urls(website):
     urls = set(urls)
     urls = '\n'.join(urls)
     return 'URLS:\n\n {}'.format(urls)
+
+
+def convertTuple(tup):
+    str = ''.join(tup)
+    return str
 
 
 def find_tags(website):
@@ -40,6 +45,28 @@ def find_tags(website):
     return 'A Tags:\n\n {}\n\n IMG Tags:\n\n {}\n'.format(href_tags, img_tags)
 
 
+def find_emails(website):
+    # req = requests.get(website)
+    # req = req.text
+    # emails = re.findall(
+    #     r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", req)
+    # emails = convertTuple(emails)
+    # emails = '\n'.join(emails)
+    # return '{}\n'.format(emails)
+    pass
+
+
+def find_phones(website):
+    # req = requests.get(website)
+    # req = req.text
+    # phones = re.findall(
+    #     r'1?\W*([2-9][0-8][0-9])\W*([2-9][0-9]{2})\W*([0-9]{4})(\se?x?t?(\d*))?', req)
+    # phones = convertTuple(phones)
+    # phones = '\n'.join(phones)
+    # return '{}\n'.format(phones)
+    pass
+
+
 def create_parser():
     """Create an argument parser object"""
     parser = argparse.ArgumentParser()
@@ -60,8 +87,12 @@ def main(args):
     parsed_args = parser.parse_args(args)
     parsed_urls = find_urls(parsed_args.webs)
     parsed_tags = find_tags(parsed_args.webs)
-    print('Full Tags:\n\n {} \n Partial Tags:\n\n {}'.format(
-        parsed_urls, parsed_tags))
+    parsed_emails = find_emails(parsed_args.webs)
+    parsed_phones = find_phones(parsed_args.webs)
+    print(
+        'Full Tags:\n {} \n Partial Tags:\n {} Emails: \n {}\n Phone Numbers:\n {}\n'.format(
+            parsed_urls, parsed_tags, parsed_emails, parsed_phones)
+    )
 
 
 if __name__ == '__main__':
