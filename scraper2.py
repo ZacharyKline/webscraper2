@@ -46,25 +46,23 @@ def find_tags(website):
 
 
 def find_emails(website):
-    # req = requests.get(website)
-    # req = req.text
-    # emails = re.findall(
-    #     r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", req)
-    # emails = convertTuple(emails)
-    # emails = '\n'.join(emails)
-    # return '{}\n'.format(emails)
-    pass
+    email_list = []
+    emails = re.findall(
+        r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", website)
+    emails = list(set(emails))
+    for email in emails:
+        email_list.append(email)
+    return email_list
 
 
 def find_phones(website):
-    # req = requests.get(website)
-    # req = req.text
-    # phones = re.findall(
-    #     r'1?\W*([2-9][0-8][0-9])\W*([2-9][0-9]{2})\W*([0-9]{4})(\se?x?t?(\d*))?', req)
-    # phones = convertTuple(phones)
-    # phones = '\n'.join(phones)
-    # return '{}\n'.format(phones)
-    pass
+    phone_nums = []
+    phones = re.findall(
+        r"1?\W*([2-9][0-8][0-9])\W*([2-9][0-9]{2})\W*([0-9]{4})(\se?x?t?(\d*))?", website)
+    phones = list(set(phones))
+    for phone in phones:
+        phone_nums.append(phone)
+    return phone_nums
 
 
 def create_parser():
